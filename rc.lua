@@ -1,3 +1,6 @@
+--
+-- SETTING A WALLPAPER IS DONE USING THE ".fehbg" SCRIPT, TO CHANGE YOUR WALLPAPER JUST SET ANOTHER ONE WITH feh
+--
 -- If LuaRocks is installed, make sure that packages installed through it are
 -- found (e.g. lgi). If LuaRocks is not installed, do nothing.
 pcall(require, "luarocks.loader")
@@ -63,14 +66,14 @@ modkey = "Mod4"
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
     awful.layout.suit.tile,
+    awful.layout.suit.spiral.dwindle,
+    --awful.layout.suit.tile.left,
     awful.layout.suit.floating,
-    awful.layout.suit.tile.left,
     --awful.layout.suit.tile.bottom,
     --awful.layout.suit.tile.top,
     --awful.layout.suit.fair,
     --awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    --awful.layout.suit.spiral.dwindle,
+    --awful.layout.suit.spiral,
     --awful.layout.suit.max,
     --awful.layout.suit.max.fullscreen,
     --awful.layout.suit.magnifier,
@@ -96,8 +99,8 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                   }
                         })
 
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
+--mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+--                                     menu = mymainmenu })
 
 -- Menubar configuration
 menubar.utils.terminal = terminal -- Set the terminal for applications that require it
@@ -313,7 +316,7 @@ globalkeys = gears.table.join(
 
     -- dmenu 
     awful.key({ modkey },            "d",     function () 
-    awful.util.spawn("dmenu_run")     end,
+    awful.util.spawn("dmenu_run -fn monospace:size=16")     end,
               {description = "launch dmenu", group = "launcher"}),
 
 
@@ -321,6 +324,29 @@ globalkeys = gears.table.join(
     awful.key({ modkey },            "b",     function () 
     awful.util.spawn("firefox")     end,
               {description = "launch firefox", group = "launcher"}),
+
+    -- virt-manager
+    awful.key({ modkey },            "v",     function () 
+    awful.util.spawn("virt-manager")     end,
+              {description = "launch virt-manager", group = "launcher"}),
+ 
+    
+
+    -- launch Okular
+    awful.key({ modkey, "Shift" },            "p",     function () 
+    awful.util.spawn("okular")     end,
+              {description = "launch okular", group = "launcher"}),
+
+    -- launch ranger
+    awful.key({ modkey },            "r",     function () 
+    awful.util.spawn(terminal .. " -e ranger")     end,
+              {description = "launch ranger", group = "launcher"}),
+
+
+    -- launch alsamixer
+    awful.key({ modkey },            "a",     function () 
+    awful.util.spawn(terminal .. " -e alsamixer")     end,
+              {description = "launch alsamixer", group = "launcher"}),
 
 
 
